@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">StyleSync</string>
+    <string name="title_activity_main">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Error messages -->
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
+    <string name="Button">Button</string>
+    <string name="Suggestions">Suggestions</string>
+    <string name="Closet">Closet</string>
+    <string name="Camera">Camera</string>
+    <string name="ClosetFragString">Closet</string>
+    <string name="CameraFragString">Camera</string>
+    <string name="SugFragString">Suggestions</string>
+    <string name="Image2">Image2</string>
+    <string name="Image1">Image1</string>
+    <string name="yourCloset">Your Closet</string>
+    <string name="CameraView">Camera</string>
+    <string name="clothingType"><u>Select clothing type:</u> </string>
+    <string name="seasonType"><u>Seasons</u></string>
+    <string name="colorType"><u>Color</u></string>
+    <string name="patternedTF">Patterned</string>
+    <string name="saveButton">Save</string>
+    <string name="clothing_type">Dropdown Menu</string>
+    <string name="select">Select com.example.TryingStuff.Item</string>
+    <string name="select_1">Select com.example.TryingStuff.Item 1</string>
+    <string name="Winter">W</string>
+    <string name="Fall">F</string>
+    <string name="Spring">Sp</string>
+    <string name="Summer">Su</string>
+    <string name="YesNo">Yes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="camera_fragment">camera fragment</string>
+    <string name="suggestions_fragment">suggestions fragment</string>
+    <string name="closet_fragment">closet fragment</string>
+    <string name="Clothing">Clothing</string>
+    <string name="Type">Type</string>
+    <string name="ClosetFragTops">Tops</string>
+    <string name="ClosetFragBottom">Bottoms</string>
+    <string-array name="types">
+        <item>----</item>
+        <item>Top</item>
+        <item>Bottom</item>
+    </string-array>
+    <string-array name="colors">
+        <item>----</item>
+        <item>Red</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Purple</item>
+        <item>White</item>
+        <item>Black</item>
+    </string-array>
+    <string name="closet">Closet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name = "suggestionsView">Suggestion</string>
+</resources>
