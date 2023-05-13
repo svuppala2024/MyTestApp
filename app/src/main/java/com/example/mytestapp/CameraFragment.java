@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -28,6 +29,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
+
+import java.util.Objects;
 
 
 public class CameraFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -85,7 +88,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         switch(view.getId()) {
             case R.id.button:
                 Resources res = getResources();
-                if(areDrawablesIdentical(imageButton.getDrawable(), ResourcesCompat.getDrawable(res,R.drawable.camera, null))) {
+                if(areDrawablesIdentical(imageButton.getBackground(), Objects.requireNonNull(ResourcesCompat.getDrawable(res, R.drawable.camera, null)))) {
                     Log.d(TAG, "onClick: save works");
                     TextView error = view.getRootView().findViewById(R.id.error);
                     error.setVisibility(View.VISIBLE);
@@ -119,10 +122,9 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
                 String type = clothingType.getSelectedItem().toString();
                 String color = clothingColor.getSelectedItem().toString();
                 Item clothing = new Item(type, color, isWinter, isSpring, isFall, isSummer, isPatterned);
-                String url = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), toBitmap(imageButton.getDrawable()), "clothing" + clothing.getId() , "Clothing item " + clothing.getId());
+                String url = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), toBitmap(imageButton.getBackground()), "clothing" + clothing.getId() , "Clothing item " + clothing.getId());
                 clothing.setPath(url);
-                AppDatabase db = Room.databaseBuilder(view.getContext(),
-                        AppDatabase.class, "database-name").allowMainThreadQueries().build();
+                AppDatabase db = AppDatabase.getInstance(getContext());
 
                 ItemDao itemDao = db.itemDao();
 
@@ -131,7 +133,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
                 clothingColor.setSelection(0);
                 clothingType.setSelection(0);
 
-                imageButton.setImageResource(R.drawable.camera);
+                imageButton.setBackgroundResource(R.drawable.camera);
 
                 spring.setChecked(false);
                 summer.setChecked(false);
@@ -167,7 +169,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
             assert data != null;
             Bundle bundle = data.getExtras();
             Bitmap finalPhoto = (Bitmap) bundle.get("data");
-            imageButton.setImageBitmap(finalPhoto);
+            imageButton.setBackground(new BitmapDrawable(getResources(), finalPhoto));
 
         }
     }

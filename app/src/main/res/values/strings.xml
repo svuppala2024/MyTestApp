@@ -46,20 +46,24 @@
     <string name="ClosetFragTops">Tops</string>
     <string name="ClosetFragBottom">Bottoms</string>
     <string-array name="types">
-        <item>----</item>
-        <item>Top</item>
-        <item>Bottom</item>
+<!--        <item>&#45;&#45;&#45;&#45;</item>-->
+        <item>short-sleeved shirt</item>
+        <item>long-sleeved shirt</item>
+        <item>tank-top</item>
+        <item>shorts</item>
+        <item>pants</item>
+        <item>skirt</item>
     </string-array>
     <string-array name="colors">
-        <item>----</item>
-        <item>Red</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-        <item>Green</item>
-        <item>Blue</item>
-        <item>Purple</item>
-        <item>White</item>
-        <item>Black</item>
+<!--        <item>&#45;&#45;&#45;&#45;</item>-->
+        <item>red</item>
+        <item>orange</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>purple</item>
+        <item>white</item>
+        <item>black</item>
     </string-array>
     <string name="closet">Closet</string>
     <!-- TODO: Remove or change this placeholder text -->

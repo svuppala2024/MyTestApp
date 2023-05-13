@@ -5,12 +5,16 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface ItemDao {
-    @Query("SELECT * FROM Closet")
-    List<Item> getAll();
+    @Query("SELECT closet.* FROM Closet")
+    Item[] getAllClothes();
+
+//    @Query("SELECT * FROM Closet")
+//    List<Item> allClothes();
 
     @Query("SELECT closet.* FROM Closet WHERE clothing_color IN (:closetColors)")
     List<Item> loadAllByColor(int[] closetColors);
@@ -31,9 +35,16 @@ public interface ItemDao {
     @Query("SELECT clothing_type FROM CLOSET")
     List<String> loadAllTypes();
 
+    @Query("SELECT rowid FROM CLOSET")
+    List<Integer> loadAllIDs();
+
+    @Query("SELECT closet.* FROM Closet WHERE item_path = :itemPath")
+    Item getItemFromPath(String itemPath);
+
 
     @Insert
     void insertAll(Item... Closets);
+
 
 
 
