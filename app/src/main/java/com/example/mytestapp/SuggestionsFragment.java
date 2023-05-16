@@ -4,8 +4,13 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +19,16 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +36,8 @@ import java.util.Objects;
 
 
 public class SuggestionsFragment extends Fragment {
+
+    private String filename = "demoFile.txt";
 
     @Nullable
     @Override
@@ -62,23 +75,47 @@ public class SuggestionsFragment extends Fragment {
             ImageView imageTop = view.findViewById(R.id.top);
             ImageView imageBottom = view.findViewById(R.id.bottom);
 
+            String topPath = outfit.get(0).getPath();
+            String bottomPath = outfit.get(1).getPath();
 
-//            String topPath = outfit.get(0).getPath();
-//            String bottomPath = outfit.get(1).getPath();
+            Log.d(TAG, "onViewCreated: " + topPath);
+            Log.d(TAG, "onViewCreated: " + bottomPath);
 
-            ContextWrapper cw = new ContextWrapper(requireActivity().getApplicationContext());
-            //File topDirectory = cw.getDir(topPath, Context.MODE_PRIVATE);
-            File topFile = new File(requireContext().getFilesDir().getAbsolutePath(), "clothing" + outfit.get(0).getId() + ".jpg");
-            Log.d(TAG, "onViewCreated: " + topFile.toString());
-            imageTop.setBackground(Drawable.createFromPath(topFile.toString()));
+            loadImageFromStorage(imageTop, topPath, outfit.get(0));
 
-            //File bottomDirectory = cw.getDir(bottomPath, Context.MODE_PRIVATE);
-            File bottomFile = new File(requireContext().getFilesDir(), "clothing" + outfit.get(1).getId() + ".jpg");
-            imageBottom.setBackground(Drawable.createFromPath(bottomFile.toString()));
+            loadImageFromStorage(imageBottom, bottomPath, outfit.get(1));
         }
-
-
-
         
     }
+
+    private void loadImageFromStorage(ImageView img, String path, Item clothing)
+    {
+
+        try {
+            File f=new File(path, "clothing" + clothing.getId() +".png");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static Bitmap toBitmap(Drawable drawable) {
+        try {
+            Bitmap bitmap;
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+            return bitmap;
+        } catch (OutOfMemoryError e) {
+            // Handle the error
+            return null;
+        }
+    }
+
+
 }

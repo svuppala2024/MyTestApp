@@ -7,7 +7,7 @@ import androidx.room.*;
 import java.util.Arrays;
 import java.util.List;
 
-@Fts4
+
 @Entity(tableName = "closet")
 public class Item {
     @Ignore
@@ -35,8 +35,7 @@ public class Item {
     String[][] matches = {redMatch, orangeMatch, yellowMatch, greenMatch, blueMatch, purpleMatch, blackMatch, whiteMatch};
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "rowid")
-    int id;
+    public int id;
     @ColumnInfo(name = "item_path")
     public String itemPath;
     @ColumnInfo(name = "clothing_type")
@@ -153,6 +152,10 @@ public class Item {
 
     public String getPath() {
         return itemPath;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

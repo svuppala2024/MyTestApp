@@ -3,6 +3,8 @@ package com.example.mytestapp;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -30,6 +32,9 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 
@@ -119,14 +124,16 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
                 boolean isWinter = winter.isChecked();
                 boolean isPatterned = patterned.isChecked();
 
-                String type = clothingType.getSelectedItem().toString();
-                String color = clothingColor.getSelectedItem().toString();
-                Item clothing = new Item(type, color, isWinter, isSpring, isFall, isSummer, isPatterned);
-                String url = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), toBitmap(imageButton.getBackground()), "clothing" + clothing.getId() , "Clothing item " + clothing.getId());
-                clothing.setPath(url);
                 AppDatabase db = AppDatabase.getInstance(getContext());
 
                 ItemDao itemDao = db.itemDao();
+
+                String type = clothingType.getSelectedItem().toString();
+                String color = clothingColor.getSelectedItem().toString();
+                Item clothing = new Item(type, color, isWinter, isSpring, isFall, isSummer, isPatterned);
+                clothing.setId(itemDao.loadAllIDs().size()+1);
+                String path = saveToInternalStorage(clothing, toBitmap(imageButton.getBackground()));
+                clothing.setPath(path);
 
                 itemDao.insertAll(clothing);
 
@@ -196,4 +203,30 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         return (stateA != null && stateA.equals(stateB))
                 || toBitmap(drawableA).sameAs(toBitmap(drawableB));
     }
+
+    private String saveToInternalStorage(Item clothing, Bitmap bitmapImage) {
+        ContextWrapper cw = new ContextWrapper(getContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory,"clothing" + clothing.getId() + ".png");
+        Log.d("Suhruth", "saveToInternalStorage: " + clothing.getId());
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
+
 }
