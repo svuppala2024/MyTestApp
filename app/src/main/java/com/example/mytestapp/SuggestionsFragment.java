@@ -2,15 +2,10 @@ package com.example.mytestapp;
 
 import static android.content.ContentValues.TAG;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,25 +14,18 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
-import androidx.room.Room;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 
 public class SuggestionsFragment extends Fragment {
 
-    private String filename = "demoFile.txt";
 
     @Nullable
     @Override
@@ -94,7 +82,7 @@ public class SuggestionsFragment extends Fragment {
         try {
             File f=new File(path, "clothing" + clothing.getId() +".png");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            img.setImageBitmap(b);
+            img.setBackground(new BitmapDrawable(getResources(), b));
         }
         catch (FileNotFoundException e)
         {
@@ -103,19 +91,6 @@ public class SuggestionsFragment extends Fragment {
 
     }
 
-    public static Bitmap toBitmap(Drawable drawable) {
-        try {
-            Bitmap bitmap;
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-            return bitmap;
-        } catch (OutOfMemoryError e) {
-            // Handle the error
-            return null;
-        }
-    }
 
 
 }

@@ -30,7 +30,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.room.Room;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +41,6 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
 
     public static final int CAMERA_ACTION_CODE = 1;
     ImageButton imageButton;
-    String filePath;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -201,7 +199,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         // If the constant state is identical, they are using the same drawable resource.
         // However, the opposite is not necessarily true.
         return (stateA != null && stateA.equals(stateB))
-                || toBitmap(drawableA).sameAs(toBitmap(drawableB));
+                || Objects.requireNonNull(toBitmap(drawableA)).sameAs(toBitmap(drawableB));
     }
 
     private String saveToInternalStorage(Item clothing, Bitmap bitmapImage) {
@@ -221,6 +219,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
             e.printStackTrace();
         } finally {
             try {
+                assert fos != null;
                 fos.close();
             } catch (IOException e) {
                 e.printStackTrace();

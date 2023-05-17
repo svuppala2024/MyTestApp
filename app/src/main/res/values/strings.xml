@@ -32,10 +32,10 @@
     <string name="clothing_type">Dropdown Menu</string>
     <string name="select">Select com.example.TryingStuff.Item</string>
     <string name="select_1">Select com.example.TryingStuff.Item 1</string>
-    <string name="Winter">W</string>
-    <string name="Fall">F</string>
-    <string name="Spring">Sp</string>
-    <string name="Summer">Su</string>
+    <string name="Winter">Winter</string>
+    <string name="Fall">Fall</string>
+    <string name="Spring">Spring</string>
+    <string name="Summer">Summer</string>
     <string name="YesNo">Yes</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="camera_fragment">camera fragment</string>

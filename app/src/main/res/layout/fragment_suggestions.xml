@@ -23,20 +23,21 @@
 
     <ImageView
         android:id="@+id/top"
-        android:layout_width="wrap_content"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:src="@drawable/tshirt"
+        android:background="@drawable/tshirt"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.5"
+
     >
 
     </ImageView>
 
     <ImageView
         android:id="@+id/bottom"
-        android:layout_width="wrap_content"
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:src="@drawable/trousers"
+        android:background="@drawable/trousers"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.5"
         android:layout_marginBottom="15dp"

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.screen,
-                    new ClosetFragment()).commit();
+                    new CameraFragment()).commit();
         }
 
 

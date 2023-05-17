@@ -1,18 +1,20 @@
 package com.example.mytestapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-
 public class ClosetFragment extends Fragment {
+
+    GridView gridView;
 
     @Nullable
     @Override
@@ -23,6 +25,15 @@ public class ClosetFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        gridView = view.findViewById(R.id.grid_view);
+        gridView.setAdapter(new ImageAdapter(getContext()));
+
+        gridView.setOnItemClickListener((adapterView, view1, position, id) -> {
+            Intent intent = new Intent(getContext(), com.example.mytestapp.FullScreenActivity.class);
+            intent.putExtra("id",position);
+            startActivity(intent);
+        });
 
     }
 }
