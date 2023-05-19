@@ -87,14 +87,14 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
 
     }
 
-    /* What to do in the ccase of the click of a button*/
+    /* What to do in the case of the click of a button*/
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.button: /* What happens when the save button is clicked */
                 Resources res = getResources();
-                if(areDrawablesIdentical(imageButton.getBackground(), Objects.requireNonNull(ResourcesCompat.getDrawable(res, R.drawable.camera, null)))) {
-                    Log.d(TAG, "onClick: save works");
+                if(imageButton.getTag().equals("Camera")) {
+                    Log.d("Suhruth", "onClick: save works");
                     TextView error = view.getRootView().findViewById(R.id.error);
                     error.setVisibility(View.VISIBLE);
                     break;
@@ -141,6 +141,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
                 clothingType.setSelection(0);
 
                 imageButton.setBackgroundResource(R.drawable.camera);
+                imageButton.setTag("Camera");
 
                 spring.setChecked(false);
                 summer.setChecked(false);
@@ -177,6 +178,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
             Bundle bundle = data.getExtras();
             Bitmap finalPhoto = (Bitmap) bundle.get("data");
             imageButton.setBackground(new BitmapDrawable(getResources(), finalPhoto));
+            imageButton.setTag("Not Camera");
 
         }
     }
@@ -196,15 +198,6 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 
-    /* Compares two drawables */
-    public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {
-        Drawable.ConstantState stateA = drawableA.getConstantState();
-        Drawable.ConstantState stateB = drawableB.getConstantState();
-        // If the constant state is identical, they are using the same drawable resource.
-        // However, the opposite is not necessarily true.
-        return (stateA != null && stateA.equals(stateB))
-                || Objects.requireNonNull(toBitmap(drawableA)).sameAs(toBitmap(drawableB));
-    }
 
     /* Saves item of clothing to internal storage as an a bitmap */
     private String saveToInternalStorage(Item clothing, Bitmap bitmapImage) {
