@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/* The prupose of this class is to display the suggesitons view */
+/* The purpose of this class is to display the suggestions view */
 public class SuggestionsFragment extends Fragment {
 
 
