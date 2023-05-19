@@ -7,52 +7,53 @@ import androidx.room.*;
 import java.util.Arrays;
 import java.util.List;
 
-
+/* This class is the data structure used for all the items of clothing */
 @Entity(tableName = "closet")
 public class Item {
     @Ignore
-    List<String> typeL = Arrays.asList("short-sleeved shirt", "long-sleeved shirt","tank-top","shorts","pants","skirt");
+    List<String> typeL = Arrays.asList("short-sleeved shirt", "long-sleeved shirt","tank-top","shorts","pants","skirt"); /* List of all types of clothing */
     @Ignore
-    List<String> colorL = Arrays.asList("red","orange","yellow","green","blue","purple","black","white");
+    List<String> colorL = Arrays.asList("red","orange","yellow","green","blue","purple","black","white"); /* List of all colors for items of clothing */
 
     @Ignore
-    String[] redMatch = {"black","white"};
+    String[] redMatch = {"black","white"}; /* String array of colors that match with red */
     @Ignore
-    String[] orangeMatch = {"black","white"};
+    String[] orangeMatch = {"black","white"}; /* String array of colors that match with orange */
     @Ignore
-    String[] yellowMatch = {"black","white"};
+    String[] yellowMatch = {"black","white"}; /* String array of colors that match with yellow */
     @Ignore
-    String[] greenMatch = {"black","white"};
+    String[] greenMatch = {"black","white"}; /* String array of colors that match with green */
     @Ignore
-    String[] blueMatch = {"black","white"};
+    String[] blueMatch = {"black","white"}; /* String array of colors that match with blue */
     @Ignore
-    String[] purpleMatch = {"black","white"};
+    String[] purpleMatch = {"black","white"}; /* String array of colors that match with purple */
     @Ignore
-    String[] blackMatch = {"red","orange","yellow","green","blue","purple","white"};
+    String[] blackMatch = {"red","orange","yellow","green","blue","purple","white"}; /* String array of colors that match with black*/
     @Ignore
-    String[] whiteMatch = {"red","orange","yellow","green","blue","purple","black"};
+    String[] whiteMatch = {"red","orange","yellow","green","blue","purple","black"}; /* String array of colors that match with white */
     @Ignore
-    String[][] matches = {redMatch, orangeMatch, yellowMatch, greenMatch, blueMatch, purpleMatch, blackMatch, whiteMatch};
+    String[][] matches = {redMatch, orangeMatch, yellowMatch, greenMatch, blueMatch, purpleMatch, blackMatch, whiteMatch}; /* 2D String array of color matches*/
 
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public int id; /* Unique integer id for each item of clothing */
     @ColumnInfo(name = "item_path")
-    public String itemPath;
+    public String itemPath; /* Directory of item of clothing */
     @ColumnInfo(name = "clothing_type")
-    public String clothingType;
+    public String clothingType; /* The clothing type of the piece of clothing */
     @ColumnInfo(name = "is_winter")
-    public boolean isWinter;
+    public boolean isWinter; /* Whether the item of clothing can be worn in winter */
     @ColumnInfo(name = "is_spring")
-    public boolean isSpring;
+    public boolean isSpring; /* Whether the item of clothing can be worn in spring */
     @ColumnInfo(name = "is_fall")
-    public boolean isFall;
+    public boolean isFall; /* Whether the item of clothing can be worn in fall */
     @ColumnInfo(name = "is_summer")
-    public boolean isSummer;
+    public boolean isSummer; /* Whether the item of clothing can be worn in summer */
     @ColumnInfo(name = "clothing_color")
-    public String color;
+    public String color; /* The color of the item of clothing */
     @ColumnInfo(name = "is_patterned")
-    public boolean isPatterned;
+    public boolean isPatterned; /* Whether the item of clothing has a pattern (stripes, words, design etc. ) */
 
+    /* Constructor for Item object with above fields */
     public Item(String type, String color, boolean w, boolean sp, boolean f, boolean su, boolean patterned) {
         clothingType = type;
         this.color = color;
@@ -63,14 +64,17 @@ public class Item {
         isPatterned = patterned;
     }
 
+    /* Sets the directory for an item of clothing */
     public void setPath(String path) {
         itemPath = path;
     }
 
+    /* Empty constructor for Item object */
     public Item() {
 
     }
 
+    /* Returns the Id of the item of clothing */
     public int getId() {
         return id;
     }
@@ -150,10 +154,13 @@ public class Item {
         return Type() +"\n"+ Color() +"\n"+ Pattern() +"\n"+ W() +"\n"+ Sp() +"\n"+ Su() +"\n"+ F()+"\n";
     }
 
+
+    /** @return the directory of the item of clothing */
     public String getPath() {
         return itemPath;
     }
 
+    /* sets the id of the item of clothing */
     public void setId(int id) {
         this.id = id;
     }

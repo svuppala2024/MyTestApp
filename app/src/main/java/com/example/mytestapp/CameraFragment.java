@@ -39,8 +39,8 @@ import java.util.Objects;
 
 public class CameraFragment extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
-    public static final int CAMERA_ACTION_CODE = 1;
-    ImageButton imageButton;
+    public static final int CAMERA_ACTION_CODE = 1; /* final integer for the camera action code */
+    ImageButton imageButton; /* ImageButton which will be clicked in order to take a picture*/
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,14 +82,16 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
 
     }
 
+    /* Empty camera fragment contructor */
     public CameraFragment() {
 
     }
 
+    /* What to do in the ccase of the click of a button*/
     @Override
     public void onClick(View view) {
         switch(view.getId()) {
-            case R.id.button:
+            case R.id.button: /* What happens when the save button is clicked */
                 Resources res = getResources();
                 if(areDrawablesIdentical(imageButton.getBackground(), Objects.requireNonNull(ResourcesCompat.getDrawable(res, R.drawable.camera, null)))) {
                     Log.d(TAG, "onClick: save works");
@@ -148,7 +150,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
 
                 break;
 
-            case R.id.imageView:
+            case R.id.imageView: /* What happens when the image is clicked */
                 TextView error = view.getRootView().findViewById(R.id.error);
                 error.setVisibility(View.INVISIBLE);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -179,6 +181,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 
+    /* Method to convert a drawable to a bitmap */
     public static Bitmap toBitmap(Drawable drawable) {
         try {
             Bitmap bitmap;
@@ -193,6 +196,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
         }
     }
 
+    /* Compares two drawables */
     public static boolean areDrawablesIdentical(Drawable drawableA, Drawable drawableB) {
         Drawable.ConstantState stateA = drawableA.getConstantState();
         Drawable.ConstantState stateB = drawableB.getConstantState();
@@ -202,6 +206,7 @@ public class CameraFragment extends Fragment implements AdapterView.OnItemSelect
                 || Objects.requireNonNull(toBitmap(drawableA)).sameAs(toBitmap(drawableB));
     }
 
+    /* Saves item of clothing to internal storage as an a bitmap */
     private String saveToInternalStorage(Item clothing, Bitmap bitmapImage) {
         ContextWrapper cw = new ContextWrapper(getContext());
         // path to /data/data/yourapp/app_data/imageDir

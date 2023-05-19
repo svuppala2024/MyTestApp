@@ -10,14 +10,12 @@ import java.util.Random;
 
 /**
  * This class generates an outfit for the user
- * @author chala
  *
  */
 public class OutfitMaker {
 
     static List<String> TypeT = Arrays.asList("short-sleeved shirt", "long-sleeved shirt", "tank-top");
     static List<String> TypeB = Arrays.asList("shorts", "pants", "skirt");
-    //static List<String> colorL = Arrays.asList("red", "orange", "yellow", "green", "blue", "purple", "black", "white");
     static ArrayList<Item> closetTops = new ArrayList<>();
     static ArrayList<Item> closetBots = new ArrayList<>();
     static Random rando = new Random();

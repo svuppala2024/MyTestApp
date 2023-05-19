@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/* The prupose of this class is to display the suggesitons view */
 public class SuggestionsFragment extends Fragment {
 
 
@@ -76,6 +76,7 @@ public class SuggestionsFragment extends Fragment {
         
     }
 
+    /* Method to set background of ImageView to an image in the internal storage of the app */
     private void loadImageFromStorage(ImageView img, String path, Item clothing)
     {
 

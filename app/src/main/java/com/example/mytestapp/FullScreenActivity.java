@@ -15,9 +15,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Objects;
 
+/* The majority of this class was created from the following video: https://www.youtube.com/watch?v=MRv0xtnaJAY */
+
 public class FullScreenActivity extends AppCompatActivity {
 
-    ImageView imageView;
+    ImageView imageView; /* The ImageView the user clicks to make fullscreen */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +31,9 @@ public class FullScreenActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Full Screen Image");
 
         Intent i = getIntent();
-        int position = i.getExtras().getInt("id");
+        int position = i.getExtras().getInt("id"); /* position of image that needs to be fullscreened */
 
-        ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext());
+        ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext()); /* New ImageAdapter object */
 
         imageAdapter.loadImageFromPosition(imageView, position);
     }

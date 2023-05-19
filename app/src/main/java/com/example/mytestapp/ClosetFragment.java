@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+/* The purpose f this class is to display the closet fragment */
+
 public class ClosetFragment extends Fragment {
 
-    GridView gridView;
+    GridView gridView; /* Gridview object */
 
     @Nullable
     @Override

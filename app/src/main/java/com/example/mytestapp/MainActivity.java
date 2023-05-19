@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+/* The purpose of this class is to load all the other fragments into the frameview with the navigation bar*/
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation); /* Object refernce for bottom navigation bar */
         bottomNav.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
